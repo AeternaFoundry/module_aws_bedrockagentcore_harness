@@ -88,6 +88,11 @@ Optional:
                 - relevance_score (optional)
                 - strategy_id (optional)
                 - top_k (optional)
+        - disabled (optional, block):
+        - managed_memory_configuration (optional, block):
+            - encryption_key_arn (optional)
+            - event_expiry_duration (optional)
+            - strategies (optional)
     - model (block):
         - bedrock_model_config (optional, block):
             - max_tokens (optional)
@@ -259,6 +264,13 @@ EOT
           strategy_id     = optional(string)
           top_k           = optional(number)
         })))
+      })))
+      disabled = optional(list(object({
+      })))
+      managed_memory_configuration = optional(list(object({
+        encryption_key_arn    = optional(string)
+        event_expiry_duration = optional(number)
+        strategies            = optional(set(string))
       })))
     })))
     model = optional(list(object({

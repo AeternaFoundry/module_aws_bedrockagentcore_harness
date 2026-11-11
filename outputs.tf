@@ -47,6 +47,10 @@ output "bedrockagentcore_harnesses_memory" {
   description = "Map of memory values across all bedrockagentcore_harnesses, keyed the same as var.bedrockagentcore_harnesses"
   value       = { for k, v in aws_bedrockagentcore_harness.bedrockagentcore_harnesses : k => v.memory if v.memory != null && length(v.memory) > 0 }
 }
+output "bedrockagentcore_harnesses_memory_actual" {
+  description = "Map of memory_actual values across all bedrockagentcore_harnesses, keyed the same as var.bedrockagentcore_harnesses"
+  value       = { for k, v in aws_bedrockagentcore_harness.bedrockagentcore_harnesses : k => v.memory_actual if v.memory_actual != null && length(v.memory_actual) > 0 }
+}
 output "bedrockagentcore_harnesses_model" {
   description = "Map of model values across all bedrockagentcore_harnesses, keyed the same as var.bedrockagentcore_harnesses"
   value       = { for k, v in aws_bedrockagentcore_harness.bedrockagentcore_harnesses : k => v.model if v.model != null && length(v.model) > 0 }

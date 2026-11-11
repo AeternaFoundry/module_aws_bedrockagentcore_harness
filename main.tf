@@ -200,6 +200,19 @@ resource "aws_bedrockagentcore_harness" "bedrockagentcore_harnesses" {
           }
         }
       }
+      dynamic "disabled" {
+        for_each = memory.value.disabled != null ? memory.value.disabled : []
+        content {
+        }
+      }
+      dynamic "managed_memory_configuration" {
+        for_each = memory.value.managed_memory_configuration != null ? memory.value.managed_memory_configuration : []
+        content {
+          encryption_key_arn    = managed_memory_configuration.value.encryption_key_arn
+          event_expiry_duration = managed_memory_configuration.value.event_expiry_duration
+          strategies            = managed_memory_configuration.value.strategies
+        }
+      }
     }
   }
 
