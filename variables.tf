@@ -54,27 +54,23 @@ Optional:
                         - resource_configuration_identifier (required)
     - environment (block):
         - agentcore_runtime_environment (optional, block):
-            - agent_runtime_arn (optional)
-            - agent_runtime_id (optional)
-            - agent_runtime_name (optional)
             - filesystem_configuration (optional, block):
                 - efs_access_point (optional, block):
-                    - access_point_arn (optional)
-                    - mount_path (optional)
+                    - access_point_arn (required)
+                    - mount_path (required)
                 - s3_files_access_point (optional, block):
-                    - access_point_arn (optional)
-                    - mount_path (optional)
+                    - access_point_arn (required)
+                    - mount_path (required)
                 - session_storage (optional, block):
-                    - mount_path (optional)
+                    - mount_path (required)
             - lifecycle_configuration (optional, block):
                 - idle_runtime_session_timeout (optional)
                 - max_lifetime (optional)
             - network_configuration (optional, block):
-                - network_mode (optional)
+                - network_mode (required)
                 - network_mode_config (optional, block):
-                    - require_service_s3_endpoint (optional)
-                    - security_groups (optional)
-                    - subnets (optional)
+                    - security_groups (required)
+                    - subnets (required)
     - environment_artifact (block):
         - container_configuration (optional, block):
             - container_uri (required)
@@ -218,20 +214,17 @@ EOT
     })))
     environment = optional(list(object({
       agentcore_runtime_environment = optional(list(object({
-        agent_runtime_arn  = optional(string)
-        agent_runtime_id   = optional(string)
-        agent_runtime_name = optional(string)
         filesystem_configuration = optional(list(object({
           efs_access_point = optional(list(object({
-            access_point_arn = optional(string)
-            mount_path       = optional(string)
+            access_point_arn = string
+            mount_path       = string
           })))
           s3_files_access_point = optional(list(object({
-            access_point_arn = optional(string)
-            mount_path       = optional(string)
+            access_point_arn = string
+            mount_path       = string
           })))
           session_storage = optional(list(object({
-            mount_path = optional(string)
+            mount_path = string
           })))
         })))
         lifecycle_configuration = optional(list(object({
@@ -239,11 +232,10 @@ EOT
           max_lifetime                 = optional(number)
         })))
         network_configuration = optional(list(object({
-          network_mode = optional(string)
+          network_mode = string
           network_mode_config = optional(list(object({
-            require_service_s3_endpoint = optional(bool)
-            security_groups             = optional(set(string))
-            subnets                     = optional(set(string))
+            security_groups = set(string)
+            subnets         = set(string)
           })))
         })))
       })))

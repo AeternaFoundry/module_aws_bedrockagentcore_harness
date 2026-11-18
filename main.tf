@@ -114,9 +114,6 @@ resource "aws_bedrockagentcore_harness" "bedrockagentcore_harnesses" {
       dynamic "agentcore_runtime_environment" {
         for_each = environment.value.agentcore_runtime_environment != null ? environment.value.agentcore_runtime_environment : []
         content {
-          agent_runtime_arn  = agentcore_runtime_environment.value.agent_runtime_arn
-          agent_runtime_id   = agentcore_runtime_environment.value.agent_runtime_id
-          agent_runtime_name = agentcore_runtime_environment.value.agent_runtime_name
           dynamic "filesystem_configuration" {
             for_each = agentcore_runtime_environment.value.filesystem_configuration != null ? agentcore_runtime_environment.value.filesystem_configuration : []
             content {
@@ -156,9 +153,8 @@ resource "aws_bedrockagentcore_harness" "bedrockagentcore_harnesses" {
               dynamic "network_mode_config" {
                 for_each = network_configuration.value.network_mode_config != null ? network_configuration.value.network_mode_config : []
                 content {
-                  require_service_s3_endpoint = network_mode_config.value.require_service_s3_endpoint
-                  security_groups             = network_mode_config.value.security_groups
-                  subnets                     = network_mode_config.value.subnets
+                  security_groups = network_mode_config.value.security_groups
+                  subnets         = network_mode_config.value.subnets
                 }
               }
             }

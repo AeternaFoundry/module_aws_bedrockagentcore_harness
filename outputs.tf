@@ -14,6 +14,10 @@ output "bedrockagentcore_harnesses_environment" {
   description = "Map of environment values across all bedrockagentcore_harnesses, keyed the same as var.bedrockagentcore_harnesses"
   value       = { for k, v in aws_bedrockagentcore_harness.bedrockagentcore_harnesses : k => v.environment if v.environment != null && length(v.environment) > 0 }
 }
+output "bedrockagentcore_harnesses_environment_actual" {
+  description = "Map of environment_actual values across all bedrockagentcore_harnesses, keyed the same as var.bedrockagentcore_harnesses"
+  value       = { for k, v in aws_bedrockagentcore_harness.bedrockagentcore_harnesses : k => v.environment_actual if v.environment_actual != null && length(v.environment_actual) > 0 }
+}
 output "bedrockagentcore_harnesses_environment_artifact" {
   description = "Map of environment_artifact values across all bedrockagentcore_harnesses, keyed the same as var.bedrockagentcore_harnesses"
   value       = { for k, v in aws_bedrockagentcore_harness.bedrockagentcore_harnesses : k => v.environment_artifact if v.environment_artifact != null && length(v.environment_artifact) > 0 }
